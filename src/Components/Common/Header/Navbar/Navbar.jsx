@@ -1,44 +1,104 @@
 import React, { useState } from "react";
-import { FaBars } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
-import "./Navbar.css";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { Box, Flex, Link, IconButton, useDisclosure } from "@chakra-ui/react";
 
 const Navbar = () => {
-  const style = {fontSize: "1.5em" };
-
-  const [clicked, setClicked] = useState(false);
-
-  const handleClick = () => {
-    setClicked(!clicked);
-  };
+  const { isOpen, onToggle } = useDisclosure(); 
 
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <a href="#">Valor Digital Unitz</a>
-      </div>
-      <ul id="nav-links" className={clicked ? "#nav-links active" : "#nav-links"}>
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Services</a>
-        </li>
+    <Box bg="gray.800" color="white" px={10} py={6}>
+      <Flex align="center" justify="space-around">
+        
+        <Link href="#" fontSize="2xl" fontWeight="bold">
+          Valor Digital Unitz
+        </Link>
 
-        <li>
-          <a href="#">Projects</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">Contact</a>
-        </li>
-      </ul>
-      <div className="hamburger-container" onClick={handleClick}>
-        {clicked ? <FaTimes style={style} /> : <FaBars style={style} />}
-      </div>
-    </nav>
+      
+        <Flex
+          as="ul"
+          display={{ base: "none", md: "flex" }} /* Hidden on small screens */
+          align="center"
+          listStyleType="none"
+        >
+          <Box as="li" mx={4}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Home
+            </Link>
+          </Box>
+          <Box as="li" mx={4}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Services
+            </Link>
+          </Box>
+          <Box as="li" mx={4}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Projects
+            </Link>
+          </Box>
+          <Box as="li" mx={4}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              About
+            </Link>
+          </Box>
+          <Box as="li" mx={4}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Contact
+            </Link>
+          </Box>
+        </Flex>
+
+      
+        <Box display={{ base: "block", md: "none" }} onClick={onToggle}>
+          <IconButton
+            icon={isOpen ? <FaTimes /> : <FaBars />}
+            fontSize="1.5em"
+            variant="unstyled"
+            aria-label="Toggle Navigation"
+          />
+        </Box>
+      </Flex>
+
+      
+      {isOpen && (
+        <Flex
+          as="ul"
+          flexDirection="column"
+          align="flex-start"
+          listStyleType="none"
+          mt={4}
+          display={{ base: "flex", md: "none" }} 
+          bg="gray.800"
+          p={4}
+          w="full"
+        >
+          <Box as="li" py={2}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Home
+            </Link>
+          </Box>
+          <Box as="li" py={2}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Services
+            </Link>
+          </Box>
+          <Box as="li" py={2}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Projects
+            </Link>
+          </Box>
+          <Box as="li" py={2}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              About
+            </Link>
+          </Box>
+          <Box as="li" py={2}>
+            <Link href="#" _hover={{ color: "orange.400" }}>
+              Contact
+            </Link>
+          </Box>
+        </Flex>
+      )}
+    </Box>
   );
 };
 

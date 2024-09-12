@@ -20,3 +20,7 @@
     --bg-color: #363859;
 
 }
+
+html {
+    scroll-behavior: smooth;
+}
